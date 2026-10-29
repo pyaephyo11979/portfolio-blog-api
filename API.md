@@ -91,7 +91,9 @@ Router: `src/features/auth/router.ts`
 
 ### `POST /api/auth/register`
 
-Public. Creates a new user.
+Authenticated (`authGuard`). Creates a new user.
+
+**Middleware:** `authGuard` → handler. Requires a valid access token in the `Authorization` header.
 
 **Request body:**
 
@@ -105,14 +107,18 @@ Public. Creates a new user.
 
 - `201` — the created user object.
 - `400` — `{ "message": ... }` — Joi validation error or `"User already exists"`.
+- `401` — auth failure (see [authGuard](#authentication)).
 
-> Note: the `201` response currently includes the hashed `password` field.
+> Notes:
+> - the `201` response currently includes the hashed `password` field.
+> - registration now requires an existing valid access token, so a fresh deployment cannot self-bootstrap: seed the first user directly in the database (see `prisma/seed.ts`) or temporarily bypass `authGuard`.
 
 **Example:**
 
 ```bash
 curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <access token>" \
   -d '{"username":"jane","email":"jane@example.com","password":"Secret123"}'
 ```
 
@@ -153,7 +159,7 @@ Public. Exchanges a refresh token for a new access token.
 **Responses:**
 
 - `200` — `{ "token": "<new access token>" }`
-- `400` — `{ "message": ... }` — `"Invalid refresh token"` or `"User not found"`.
+- `400` — `{ "message": "Invalid refresh token" }` — bad/expired token; also returned when the token is valid but the user no longer exists.
 
 ---
 
