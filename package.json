@@ -26,7 +26,9 @@
     "joi": "^18.3.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
+    "multer-s3": "^3.0.1",
     "pg": "^8.23.1",
+    "prettier": "^3.9.10",
     "prisma": "6",
     "typescript": "^7.0.2"
   },
@@ -43,6 +45,7 @@
     "@types/express": "^5.0.6",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer-s3": "^3.0.3",
     "@types/node": "^26.6.6",
     "tsc-alias": "^1.9.9"
   }
