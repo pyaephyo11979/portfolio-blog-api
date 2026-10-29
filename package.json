@@ -5,7 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.ts",
+    "build":"tsc && tsc-alias",
+    "start": "node dist/server.js",
     "dev": "bun --watch src/server.ts"
   },
   "keywords": [],
@@ -27,7 +28,6 @@
     "multer": "^2.5.0",
     "pg": "^8.23.1",
     "prisma": "6",
-    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   },
   "prisma": {
@@ -41,6 +41,7 @@
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/joi": "^17.2.3",
-    "@types/jsonwebtoken": "^9.0.10"
+    "@types/jsonwebtoken": "^9.0.10",
+    "tsc-alias": "^1.9.9"
   }
 }
