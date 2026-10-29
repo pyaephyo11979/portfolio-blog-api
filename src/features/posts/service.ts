@@ -1,5 +1,5 @@
-import { prisma } from "@utils/prisma";
-import type { Post, PostImage } from "../generated/prisma/client";
+import { prisma } from '@utils/prisma';
+import type { Post, PostImage } from '../generated/prisma/client';
 export default class PostService {
   private static instance: PostService;
   constructor() {
@@ -22,7 +22,7 @@ export default class PostService {
       return post;
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to create post",
+        error instanceof Error ? error.message : 'Failed to create post'
       );
     }
   }
@@ -33,7 +33,7 @@ export default class PostService {
         where: { id: postId },
       });
       if (!postExists) {
-        throw new Error("Post not found");
+        throw new Error('Post not found');
       }
       const postImage = await prisma.postImage.create({
         data: {
@@ -46,7 +46,7 @@ export default class PostService {
       return postImage;
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to add post image",
+        error instanceof Error ? error.message : 'Failed to add post image'
       );
     }
   }
@@ -72,7 +72,7 @@ export default class PostService {
       return { posts, totalCount, totalPages, currentPage: page };
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to get posts",
+        error instanceof Error ? error.message : 'Failed to get posts'
       );
     }
   }
@@ -88,7 +88,7 @@ export default class PostService {
       return post;
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to get post",
+        error instanceof Error ? error.message : 'Failed to get post'
       );
     }
   }
@@ -102,7 +102,7 @@ export default class PostService {
       return post;
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to update post",
+        error instanceof Error ? error.message : 'Failed to update post'
       );
     }
   }
@@ -118,13 +118,13 @@ export default class PostService {
       const imageDeletionPromises = post.postImages.map((image: PostImage) =>
         prisma.postImage.delete({
           where: { id: image.id },
-        }),
+        })
       );
       await Promise.all(imageDeletionPromises);
       return post;
     } catch (error: unknown) {
       throw new Error(
-        error instanceof Error ? error.message : "Failed to delete post",
+        error instanceof Error ? error.message : 'Failed to delete post'
       );
     }
   }

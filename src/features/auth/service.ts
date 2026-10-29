@@ -1,8 +1,8 @@
-import "dotenv/config";
-import { prisma } from "../../utils/prisma";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import { registerSchema, loginSchema } from "./schema";
+import 'dotenv/config';
+import { prisma } from '../../utils/prisma';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { registerSchema, loginSchema } from './schema';
 
 export default class AuthService {
   private static instance: AuthService;
@@ -24,7 +24,7 @@ export default class AuthService {
         where: { email },
       });
       if (existingUser) {
-        throw new Error("User already exists");
+        throw new Error('User already exists');
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await prisma.user.create({
@@ -38,7 +38,7 @@ export default class AuthService {
     } catch (error: unknown) {
       console.error(error);
       throw new Error(
-        error instanceof Error ? error.message : "Failed to register",
+        error instanceof Error ? error.message : 'Failed to register'
       );
     }
   }
@@ -54,26 +54,26 @@ export default class AuthService {
         where: { email },
       });
       if (!user) {
-        throw new Error("User not found");
+        throw new Error('User not found');
       }
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
-        throw new Error("Invalid password");
+        throw new Error('Invalid password');
       }
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
-        expiresIn: "1h",
+        expiresIn: '1h',
       });
       const refreshToken = jwt.sign(
         { id: user.id },
         process.env.REFRESH_SECRET!,
-        { expiresIn: "7d" },
+        { expiresIn: '7d' }
       );
 
       return { token, refreshToken, user };
     } catch (error: unknown) {
       console.error(error);
       throw new Error(
-        error instanceof Error ? error.message : "Failed to login",
+        error instanceof Error ? error.message : 'Failed to login'
       );
     }
   }
@@ -87,15 +87,15 @@ export default class AuthService {
         where: { id: decoded.id },
       });
       if (!user) {
-        throw new Error("User not found");
+        throw new Error('User not found');
       }
       const newToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
-        expiresIn: "1h",
+        expiresIn: '1h',
       });
       return { token: newToken, user };
     } catch (error) {
       console.error(error);
-      throw new Error("Invalid refresh token");
+      throw new Error('Invalid refresh token');
     }
   }
 }

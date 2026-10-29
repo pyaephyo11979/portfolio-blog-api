@@ -1,7 +1,7 @@
-import "dotenv/config";
-import PostService from "./service";
-import type { Request, Response } from "express";
-import { createPostSchema } from "./schema";
+import 'dotenv/config';
+import PostService from './service';
+import type { Request, Response } from 'express';
+import { createPostSchema } from './schema';
 
 class PostController {
   private postService: PostService;
@@ -42,7 +42,7 @@ class PostController {
       const { page, limit } = req.query;
       const data = await this.postService.getAllPosts(
         page ? Number(page) : 1,
-        limit ? Number(limit) : 20,
+        limit ? Number(limit) : 20
       );
       res.status(200).json({
         data: data.posts,
@@ -63,12 +63,12 @@ class PostController {
   async getPostById(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      if (typeof id !== "string") {
-        return res.status(400).json({ message: "Invalid post ID" });
+      if (typeof id !== 'string') {
+        return res.status(400).json({ message: 'Invalid post ID' });
       }
       const post = await this.postService.getPostById(id);
       if (!post) {
-        return res.status(404).json({ message: "Post not found" });
+        return res.status(404).json({ message: 'Post not found' });
       }
       res.status(200).json(post);
     } catch (error: any) {
@@ -79,8 +79,8 @@ class PostController {
   async updatePost(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      if (typeof id !== "string") {
-        return res.status(400).json({ message: "Invalid post ID" });
+      if (typeof id !== 'string') {
+        return res.status(400).json({ message: 'Invalid post ID' });
       }
       const post = await this.postService.updatePost(id, req.body);
       res.status(200).json(post);
@@ -92,8 +92,8 @@ class PostController {
   async deletePost(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      if (typeof id !== "string") {
-        return res.status(400).json({ message: "Invalid post ID" });
+      if (typeof id !== 'string') {
+        return res.status(400).json({ message: 'Invalid post ID' });
       }
       await this.postService.deletePost(id);
       res.status(204).send();

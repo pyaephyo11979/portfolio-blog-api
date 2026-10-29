@@ -1,8 +1,8 @@
-import "dotenv/config";
-import { PrismaClient } from "../features/generated/prisma/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
-import { neonConfig } from "@neondatabase/serverless";
-import ws from "ws";
+import 'dotenv/config';
+import { PrismaClient } from '../features/generated/prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { neonConfig } from '@neondatabase/serverless';
+import ws from 'ws';
 
 neonConfig.webSocketConstructor = ws;
 
@@ -11,4 +11,3 @@ const adapter = new PrismaNeon({ connectionString });
 export const prisma = new PrismaClient({
   adapter,
 });
-  

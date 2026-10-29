@@ -1,5 +1,5 @@
-import AuthService from "./service";
-import type { Request, Response } from "express";
+import AuthService from './service';
+import type { Request, Response } from 'express';
 
 class AuthController {
   private authService: AuthService;
@@ -20,7 +20,7 @@ class AuthController {
   async login(req: Request, res: Response) {
     try {
       const { token, refreshToken, user } = await this.authService.login(
-        req.body,
+        req.body
       );
       res.status(200).json({ token, refreshToken });
     } catch (error: any) {

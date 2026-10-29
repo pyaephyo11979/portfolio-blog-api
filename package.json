@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "prisma generate && tsc && tsc-alias --resolve-full-paths",
     "start": "node dist/server.js",
-    "dev": "bun --watch src/server.ts"
+    "dev": "bun --watch src/server.ts",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "keywords": [],
   "author": "",
@@ -29,7 +30,6 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
     "multer-s3": "^3.0.1",
-    "prettier": "^3.9.10",
     "prisma": "6",
     "typescript": "^7.0.2",
     "ws": "^8.22.0"
@@ -51,6 +51,7 @@
     "@types/multer-s3": "^3.0.3",
     "@types/node": "^26.6.6",
     "@types/ws": "^8.18.2",
+    "prettier": "^3.9.10",
     "tsc-alias": "^1.9.9"
   }
 }

@@ -1,4 +1,4 @@
-import joi from "joi";
+import joi from 'joi';
 
 export const createPostSchema = joi.object({
   title: joi.string().min(3).max(100).required(),
