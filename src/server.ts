@@ -1,6 +1,7 @@
 import express from "express";
 import authRouter from "@features/auth/router";
 import cookieParser from "cookie-parser";
+import postsRouter from "@features/posts/route";
 import cors from "cors";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
+app.use("/api/posts", postsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, (err) => {
