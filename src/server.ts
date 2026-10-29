@@ -1,5 +1,5 @@
 import express from "express";
-import authRouter from "./features/auth/router";
+import authRouter from "@features/auth/router";
 import cookieParser from "cookie-parser";
 
 const app = express();

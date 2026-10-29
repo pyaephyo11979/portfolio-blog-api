@@ -1,6 +1,5 @@
 import AuthController from "./controller";
 import {Router} from "express";
-import {authGuard} from "../../middlewares/auth-guard";
 
 const authController = new AuthController();
 const router = Router();
