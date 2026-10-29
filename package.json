@@ -2,10 +2,10 @@
   "name": "portfolio-blog-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tsc && tsc-alias",
+    "build": "prisma generate && tsc && tsc-alias --resolve-full-paths",
     "start": "node dist/server.js",
     "dev": "bun --watch src/server.ts"
   },
@@ -32,16 +32,18 @@
   },
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts"
+    "seed": "bun prisma/seed.ts"
   },
   "devDependencies": {
     "@types/aws-sdk": "^2.7.4",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^3.0.0",
+    "@types/bun": "^1.4.4",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.6",
     "tsc-alias": "^1.9.9"
   }
 }
