@@ -15,7 +15,8 @@
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1159.0",
-    "@prisma/adapter-pg": "^7.10.1",
+    "@neondatabase/serverless": "^1.2.0",
+    "@prisma/adapter-neon": "^7.10.1",
     "@prisma/client": "6",
     "@types/multer": "^2.3.0",
     "aws-sdk": "^2.1693.0",
@@ -28,10 +29,10 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
     "multer-s3": "^3.0.1",
-    "pg": "^8.23.1",
     "prettier": "^3.9.10",
     "prisma": "6",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "ws": "^8.22.0"
   },
   "prisma": {
     "schema": "prisma/schema.prisma",
@@ -49,6 +50,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer-s3": "^3.0.3",
     "@types/node": "^26.6.6",
+    "@types/ws": "^8.18.2",
     "tsc-alias": "^1.9.9"
   }
 }

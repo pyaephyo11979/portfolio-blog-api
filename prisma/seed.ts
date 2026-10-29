@@ -1,11 +1,12 @@
 import { prisma } from "../src/utils/prisma";
+import bcrypt from "bcryptjs";
 
 async function seed() {
   const user = await prisma.user.create({
     data: {
       username: "admin",
       email: "pyarephyoehlaing16@gmail.com",
-      password: "password",
+      password: await bcrypt.hash("password", 10),
     },
   });
   console.log("Seeded user:", user);
