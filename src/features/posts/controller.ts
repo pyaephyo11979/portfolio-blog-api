@@ -1,6 +1,7 @@
 import "dotenv/config";
 import PostService from "./service";
 import type { Request, Response } from "express";
+import { createPostSchema } from "./schema";
 
 class PostController {
   private postService: PostService;
@@ -11,6 +12,10 @@ class PostController {
 
   async createPost(req: Request, res: Response) {
     try {
+      const { error } = createPostSchema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ message: error.message });
+      }
       const post = await this.postService.createPost(req.body);
 
       if (req.files && Array.isArray(req.files)) {
