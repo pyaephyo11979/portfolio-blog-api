@@ -1,0 +1,6 @@
+{
+  "name": "portfolio-blog-backend",
+  "main": "dist/server.js",
+  "compatibility_date": "2026-11-04",
+  "compatibility_flags": ["nodejs_compat"]
+}

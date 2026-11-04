@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types":["node","bun","@cloudflare/workers-types"],
     "rootDir": "./src",
     "outDir": "./dist",
 

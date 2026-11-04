@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import { httpServerHandler } from 'cloudflare:node';
 
 import authRouter from '@features/auth/router';
 import postsRouter from '@features/posts/route';
@@ -30,3 +31,5 @@ app.listen(PORT, (err) => {
   }
   console.log(`Server is running on port ${PORT}`);
 });
+
+export default httpServerHandler({ port: PORT? });
