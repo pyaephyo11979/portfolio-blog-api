@@ -23,7 +23,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/messages', messagesRouter);
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT, (err) => {
   if (err) {
     console.error(`Error starting server: ${err}`);
@@ -32,4 +32,4 @@ app.listen(PORT, (err) => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-export default httpServerHandler({ port: PORT? });
+export default httpServerHandler({ port: PORT });
