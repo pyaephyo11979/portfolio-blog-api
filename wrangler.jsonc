@@ -1,6 +1,6 @@
 {
   "name": "portfolio-blog-api",
-  "main": "dist/server.js",
+  "main": "src/server.ts",
   "compatibility_date": "2026-11-04",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
