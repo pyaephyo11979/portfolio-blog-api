@@ -7,7 +7,6 @@ import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
 
 const connectionString = process.env.DATABASE_URL!;
-const adapter = new PrismaNeon({ connectionString });
 
 // 1. Export the prisma instance exactly as your other files expect it
 export let prisma: PrismaClient;
@@ -18,13 +17,11 @@ let isInitialized = false;
 export function initPrisma(databaseUrl: string) {
   if (isInitialized) return;
 
+  const adapter = new PrismaNeon({ connectionString: databaseUrl });
+
   // Instantiates the client using the active runtime environment variable
   prisma = new PrismaClient({
-    datasources: {
-      db: {
-        url: databaseUrl,
-      },
-    },
+    adapter,
   });
 
   isInitialized = true;
