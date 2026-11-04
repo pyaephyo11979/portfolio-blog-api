@@ -33,5 +33,3 @@ app.listen(PORT, (err) => {
   console.log(`Server is running on port ${PORT}`);
   initPrisma(process.env.DATABASE_URL!);
 });
-
-export default httpServerHandler({ port: PORT });
