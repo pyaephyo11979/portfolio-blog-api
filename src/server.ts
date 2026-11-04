@@ -6,6 +6,7 @@ import { httpServerHandler } from 'cloudflare:node';
 import authRouter from '@features/auth/router';
 import postsRouter from '@features/posts/route';
 import messagesRouter from '@features/messages/router';
+import { initPrisma } from '@utils/prisma';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.listen(PORT, (err) => {
     return;
   }
   console.log(`Server is running on port ${PORT}`);
+  initPrisma(process.env.DATABASE_URL!);
 });
 
 export default httpServerHandler({ port: PORT });
