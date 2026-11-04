@@ -1,12 +1,11 @@
 {
   "name": "portfolio-blog-backend",
-  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "prisma generate && tsc && tsc-alias --resolve-full-paths",
+    "build": "prisma generate && tsc && tsc-alias",
     "start": "node dist/server.js",
     "dev": "bun --watch src/server.ts",
     "format": "prettier --write \"src/**/*.ts\""
@@ -14,12 +13,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1159.0",
     "@neondatabase/serverless": "^1.2.0",
     "@prisma/adapter-neon": "6.19.3",
     "@prisma/client": "6",
     "@types/multer": "^2.3.0",
+    "aws-sdk": "^2.1693.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -28,6 +29,7 @@
     "joi": "^18.3.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
+    "multer-s3": "^3.0.1",
     "prisma": "6",
     "typescript": "^7.0.2",
     "wrangler": "^4.157.0",
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261104.1",
+    "@types/aws-sdk": "^2.7.4",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^3.0.0",
     "@types/bun": "^1.4.4",
@@ -47,6 +50,7 @@
     "@types/express": "^5.0.6",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer-s3": "^3.0.3",
     "@types/node": "^26.6.6",
     "@types/ws": "^8.18.2",
     "prettier": "^3.9.10",
