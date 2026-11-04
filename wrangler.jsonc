@@ -1,6 +1,11 @@
 {
-  "name": "portfolio-blog-backend",
+  "name": "portfolio-blog-api",
   "main": "dist/server.js",
   "compatibility_date": "2026-11-04",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "logs": {
+      "enabled": true
+    }
+  }
 }
