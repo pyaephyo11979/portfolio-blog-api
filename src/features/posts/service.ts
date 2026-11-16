@@ -1,7 +1,9 @@
-import { prisma } from '@utils/prisma';
+import "dotenv/config";
+import { getPrisma } from '@utils/prisma';
 import type { Post, PostImage } from '../generated/prisma/client';
 export default class PostService {
   private static instance: PostService;
+  private databaseUrl = process.env.DATABASE_URL || "";
   constructor() {
     if (!PostService.instance) {
       PostService.instance = this;
@@ -12,6 +14,7 @@ export default class PostService {
   async createPost(data: { title: string; content: string; authorId: string }) {
     try {
       const { title, content, authorId } = data;
+      const prisma = getPrisma(this.databaseUrl);
       const post = await prisma.post.create({
         data: {
           title,
@@ -29,6 +32,7 @@ export default class PostService {
 
   async addPostImage(postId: string, imageUrl: string) {
     try {
+      const prisma =getPrisma(this.databaseUrl);
       const postExists = await prisma.post.findUnique({
         where: { id: postId },
       });
@@ -53,6 +57,7 @@ export default class PostService {
 
   async getAllPosts(pg: number = 1, limit: number = 20) {
     try {
+      const prisma = getPrisma(this.databaseUrl);
       const page = Math.max(Number(pg) || 1, 1);
       const skip = (page - 1) * limit;
 
@@ -79,6 +84,7 @@ export default class PostService {
 
   async getPostById(id: string) {
     try {
+      const prisma =getPrisma(this.databaseUrl);
       const post = await prisma.post.findUnique({
         where: { id },
         include: {
@@ -95,6 +101,7 @@ export default class PostService {
 
   async updatePost(id: string, data: { title?: string; content?: string }) {
     try {
+      const prisma = getPrisma(this.databaseUrl);
       const post = await prisma.post.update({
         where: { id },
         data,
@@ -109,6 +116,7 @@ export default class PostService {
 
   async deletePost(id: string) {
     try {
+      const prisma=getPrisma(this.databaseUrl);
       const post = await prisma.post.delete({
         where: { id },
         include: {

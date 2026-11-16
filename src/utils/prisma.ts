@@ -26,3 +26,8 @@ export function initPrisma(databaseUrl: string) {
 
   isInitialized = true;
 }
+
+export function getPrisma(databaseUrl: string){
+  const adapter = new PrismaNeon({connectionString:databaseUrl});
+  return new PrismaClient({adapter})
+}

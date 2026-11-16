@@ -1,11 +1,12 @@
 import 'dotenv/config';
-import { prisma } from '../../utils/prisma';
+import { getPrisma } from '@utils/prisma';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { registerSchema, loginSchema } from './schema';
 
 export default class AuthService {
   private static instance: AuthService;
+  private databaseUrl = process.env.DATABASE_URL || "";
   constructor() {
     if (!AuthService.instance) {
       AuthService.instance = this;
@@ -20,6 +21,7 @@ export default class AuthService {
       if (error) {
         throw new Error(error.details[0]?.message);
       }
+      const prisma = getPrisma(this.databaseUrl);
       const existingUser = await prisma.user.findUnique({
         where: { email },
       });
@@ -50,6 +52,7 @@ export default class AuthService {
       if (error) {
         throw new Error(error.details[0]?.message);
       }
+      const prisma = getPrisma(this.databaseUrl);
       const user = await prisma.user.findUnique({
         where: { email },
       });
@@ -83,6 +86,7 @@ export default class AuthService {
       const decoded = jwt.verify(token, process.env.REFRESH_SECRET!) as {
         id: string;
       };
+      const prisma = getPrisma(this.databaseUrl);
       const user = await prisma.user.findUnique({
         where: { id: decoded.id },
       });

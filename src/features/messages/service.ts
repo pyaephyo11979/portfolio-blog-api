@@ -1,6 +1,8 @@
-import { prisma } from '@utils/prisma';
+import "dotenv/config";
+import { getPrisma } from '@utils/prisma';
 export default class MessageService {
   private static instance: MessageService;
+  private databaseUrl = process.env.DATABASE_URL || "";
   constructor() {
     if (!MessageService.instance) {
       MessageService.instance = this;
@@ -11,6 +13,7 @@ export default class MessageService {
   async createMessage(data: { name: string; email: string; message: string }) {
     try {
       const { name, email, message } = data;
+      const prisma = getPrisma(this.databaseUrl);
       const contactMessage = await prisma.contactMessage.create({
         data: {
           name,
@@ -28,6 +31,7 @@ export default class MessageService {
 
   async getAllMessages(pg: number = 1, limit: number = 20) {
     try {
+      const prisma = getPrisma(this.databaseUrl);
       const page = Math.max(Number(pg) || 1, 1);
       const skip = (page - 1) * limit;
 
@@ -55,6 +59,7 @@ export default class MessageService {
 
   async getMessageById(id: string) {
     try {
+      const prisma = getPrisma(this.databaseUrl);
       const message = await prisma.contactMessage.findUnique({
         where: { id },
       });
@@ -68,6 +73,7 @@ export default class MessageService {
 
   async deleteMessage(id: string) {
     try {
+      const prisma = getPrisma(this.databaseUrl);
       await prisma.contactMessage.delete({
         where: { id },
       });
