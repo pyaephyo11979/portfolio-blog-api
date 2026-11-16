@@ -3,7 +3,7 @@ import joi from 'joi';
 export const createPostSchema = joi.object({
   title: joi.string().min(3).max(100).required(),
   content: joi.string().min(10).required(),
-  authorId: joi.number().integer().required(),
+  authorId: joi.string().required(),
 });
 
 export const addPostImageSchema = joi.object({
